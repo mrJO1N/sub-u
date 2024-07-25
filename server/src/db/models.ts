@@ -1,12 +1,3 @@
-import conn from "./conn";
-import User from "./models/users.model";
+import User from "./models/user.model";
 
-conn.getRepository(User);
-
-export const models = {
-  User,
-};
-
-export const repos = {
-  User: conn.getRepository(User),
-};
+export const models = { User };

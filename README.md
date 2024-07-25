@@ -1,14 +1,18 @@
-### stack frontend:
+<!-- ### stack frontend:
 
 - html/css
 - typescript
 - React 19
-- axios
+- axios -->
 
 ### stack backend:
 
+- mvc
 - typescript
 - express
+- sequelize
+- jwt
+- joi
 
 <!--
 

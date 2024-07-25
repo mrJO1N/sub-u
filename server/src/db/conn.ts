@@ -1,19 +1,14 @@
-import { DataSource } from "typeorm";
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
-const DB_NAME = process.env.DB_NAME ?? "database",
-  DB_USER = process.env.DB_USER ?? "postgres",
-  DB_PASSWORD = process.env.DB_PASSWORD ?? "",
-  DB_PORT = Number(process.env.DB_PORT ?? 5432),
-  DB_HOST = process.env.DB_HOST ?? "localhost";
+dotenv.config();
 
-const DB_URL =
-  process.env.DB_URL ??
-  `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
-
-export default new DataSource({
-  type: "postgres",
-  url: DB_URL,
-  port: DB_PORT,
-  entities: ["src/db/models/**/*.model.ts"], // Path to entities
-  synchronize: true, // Automatically synchronize database schema with entities
+export default new Sequelize({
+  dialect: "postgres",
+  database: process.env.DB_NAME ?? "",
+  username: process.env.DB_USER ?? "",
+  password: process.env.DB_PASSWORD ?? "",
+  host: process.env.DB_HOST ?? "localhost",
+  port: Number(process.env.DB_PORT ?? 5432),
+  logging: false, // Set to true for detailed logging
 });
