@@ -1,6 +1,25 @@
+@font-face {
+  font-family: Kreon-bold;
+  src: url("../../../../public/fonts/kreon/Kreon-Bold.ttf");
+}
+
 .Input {
   width: 100%;
   padding: 5px 15px;
   margin: 5px 0;
-  border: 2px solid teal;
+  border: none;
+  height: 30px;
+  color: #1e4a4a;
+  font-size: 20px;
+  font-family: Kreon-Bold;
+  border-radius: 15px;
+  background: #d3f2f2;
+}
+
+.Input:focus {
+  outline: none;
+}
+
+.Input::placeholder {
+  color: #147777;
 }

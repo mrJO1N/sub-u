@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
-import { getUsers } from "./API/main";
+// import { getUsers } from "./API/main";
 import { UI } from "./components/UI/main";
-import FindUserForm from "./components/FindUserForm";
-import UserList from "./components/UserList";
-import { UserI } from "./types";
 
 function App() {
-  const [userList, setUserList] = useState<UserI[]>([]);
-
-  useEffect(() => {
-    getUsers().then((users) => setUserList(users));
-  }, []);
-
   return (
     <div className="App">
-      <FindUserForm setUserList={setUserList} />
-      <hr style={{ padding: "0 0px", margin: "10px 0" }} />
-      <UserList users={userList} />
+      <UI.Modal name="login" className="active">
+        <UI.Input placeholder="email" />
+        <UI.Input placeholder="name" />
+        <UI.Input placeholder="name" />
+        <UI.Input placeholder="name" />
+        <UI.Input placeholder="name" />
+        <UI.Button>test</UI.Button>
+      </UI.Modal>
     </div>
   );
 }

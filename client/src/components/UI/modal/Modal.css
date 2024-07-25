@@ -1,0 +1,42 @@
+@font-face {
+  font-family: Lexend-Deca;
+  src: url("../../../../public/fonts/Lexend_Deca/LexendDeca-VariableFont_wght.ttf");
+}
+
+.Modal {
+  display: none;
+  padding: 20px;
+}
+
+.Modal.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Modal-name {
+  margin-bottom: 20px;
+  color: white;
+  font-size: 56px;
+  font-family: Lexend-Deca;
+}
+.Modal-content {
+  padding: 25px;
+  background: radial-gradient(#83ffff, #3ce2e2);
+  border-radius: 16px;
+  min-width: 250px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Modal-content > * {
+  margin-bottom: 10px;
+}
+
+.Modal-content > button {
+  margin-top: 15px;
+}
