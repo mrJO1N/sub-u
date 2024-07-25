@@ -1,0 +1,39 @@
+@font-face {
+  font-family: Kreon-bold;
+  src: url("../../public/fonts/kreon/Kreon-Bold.ttf");
+}
+
+.Header {
+  height: 80px;
+  width: 100vw;
+  background: #3ce2e2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  margin-left: 50px;
+  font-size: 56px;
+  font-weight: bold;
+  font-family: Kreon-Bold;
+  color: white;
+}
+
+.Header > .menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
+
+.Header > .menu > * {
+  margin-right: 30px;
+  font-size: 40px;
+}
+
+.Header > .menu > li > * {
+  font-family: Kreon-Bold;
+  color: #004242;
+  text-decoration: none;
+}

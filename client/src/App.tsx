@@ -1,19 +1,21 @@
 import React from "react";
 import "./App.css";
-// import { getUsers } from "./API/main";
-import { UI } from "./components/UI/main";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./components/AppRouter";
 
 function App() {
   return (
     <div className="App">
-      <UI.Modal name="login" className="active">
-        <UI.Input placeholder="email" />
-        <UI.Input placeholder="name" />
-        <UI.Input placeholder="name" />
-        <UI.Input placeholder="name" />
-        <UI.Input placeholder="name" />
-        <UI.Button>test</UI.Button>
-      </UI.Modal>
+      {/* <Header
+        menuList={[
+          { url: "/i", label: "sigh in" },
+          { url: "/i", label: "transfer" },
+        ]}
+      /> */}
+
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
     </div>
   );
 }

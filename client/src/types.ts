@@ -1,4 +1,4 @@
-export interface UserI {
-  email: string;
-  num?: string;
+export interface MenuItemI {
+  url: string;
+  label: string;
 }

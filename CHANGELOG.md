@@ -14,3 +14,8 @@
 ## 0.3.0
 
 - add ui reused components
+
+## 0.4.0
+
+- add some home page
+- add routing
