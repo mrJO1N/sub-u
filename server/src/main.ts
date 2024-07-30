@@ -8,7 +8,7 @@ import ErrorHandler from "./middlewares/ErrorHandler";
 const app = express();
 dotenv.config();
 
-const PORT = Number(process.env.PORT ?? 80),
+const PORT = Number(process.env.PORT ?? 80);
   // HOSTNAME = process.env.PORT ?? "localhost";
 app.use(cors());
 app.use(express.json());
