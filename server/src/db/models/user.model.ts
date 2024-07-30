@@ -12,7 +12,7 @@ const User: ModelDefined<UserAttrI, UserCreationAttrI> = sequelize.define(
       // unique: true,
     },
     balance: { type: DataTypes.INTEGER, defaultValue: 0 },
-    name: { type: DataTypes.STRING },
+    name: { type: DataTypes.STRING, unique: true },
     email: { type: DataTypes.STRING, unique: true },
     // emailIsVerified: { type: DataTypes.BOOLEAN, defaultValue: false },
     password: { type: DataTypes.STRING },

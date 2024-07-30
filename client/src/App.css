@@ -1,0 +1,10 @@
+@font-face {
+  font-family: Kreon-bold;
+  src: url("../public/fonts/kreon/Kreon-Bold.ttf");
+}
+
+a {
+  font-family: Kreon-Bold;
+  color: #004242;
+  text-decoration: none;
+}

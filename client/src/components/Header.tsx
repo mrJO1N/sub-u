@@ -1,6 +1,7 @@
 import React, { HTMLAttributes } from "react";
 import "../styles/Header.css";
 import { MenuItemI } from "../types";
+import { Link } from "react-router-dom";
 
 function Header(
   props: HTMLAttributes<HTMLDivElement> & { menuList: MenuItemI[] }
@@ -12,7 +13,7 @@ function Header(
         {props.menuList.map((menuItem) => {
           return (
             <li key={menuItem.url}>
-              <a href={menuItem.url}>{menuItem.label}</a>
+              <Link to={menuItem.url}>{menuItem.label}</Link>
             </li>
           );
         })}

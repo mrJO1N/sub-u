@@ -25,3 +25,10 @@
 _(for testing client-server integration)_
 
 - add login page with some animations
+
+## 0.4.9
+
+- now username must be unique
+- fix now bad request is http 400
+- add register page
+- add coockie for jwt token with util

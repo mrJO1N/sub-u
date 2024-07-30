@@ -20,7 +20,6 @@ function Alert(
       const newCssClasses = ["Alert", "unmount"];
       if (props.className) newCssClasses.push(...props.className.split(" "));
       setCssClasses(newCssClasses);
-      console.log("hello");
     };
   }, []);
 

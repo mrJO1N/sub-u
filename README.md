@@ -3,7 +3,7 @@
 - html/css
 - typescript
 - React 19
-<!-- - axios -->
+- axios
 
 ### stack backend:
 
@@ -13,6 +13,9 @@
 - sequelize
 - jwt
 - joi
+
+backend hosted on render.com  
+( https://sub-u.onrender.com )
 
 <!--
 

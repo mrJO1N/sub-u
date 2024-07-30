@@ -46,6 +46,11 @@
 }
 
 .Modal-content > button {
-  margin-top: 15px;
   float: right;
+}
+
+.Modal-content > span > a {
+  margin-top: 10px;
+  float: left;
+  font-size: 150%;
 }
