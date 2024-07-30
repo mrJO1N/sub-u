@@ -32,3 +32,8 @@ _(for testing client-server integration)_
 - fix now bad request is http 400
 - add register page
 - add coockie for jwt token with util
+
+## 0.5.0
+
+- now client is hosted
+- fix now only one Header node

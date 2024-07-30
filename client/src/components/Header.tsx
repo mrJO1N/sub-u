@@ -8,7 +8,9 @@ function Header(
 ) {
   return (
     <div className="Header">
-      <span className="logo">sub U</span>
+      <Link to="/" className="logo">
+        sub U
+      </Link>
       <ul className="menu">
         {props.menuList.map((menuItem) => {
           return (

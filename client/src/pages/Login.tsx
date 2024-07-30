@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Joi from "joi";
 import userService from "../API/user.service";
-import Header from "../components/Header";
 import { UI } from "../components/UI/main";
 import { Link } from "react-router-dom";
 import cookie from "../utils/cookie";
@@ -29,12 +28,6 @@ function Login() {
 
   return (
     <div className="Home-page">
-      <Header
-        menuList={[
-          { url: "/login", label: "sigh in" },
-          { url: "/i", label: "transfer" },
-        ]}
-      />
       {error && (
         <UI.Alert
           name="form rrror"
