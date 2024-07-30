@@ -6,6 +6,7 @@
 .Modal {
   display: none;
   padding: 20px;
+  position: relative;
 }
 
 .Modal.active {
@@ -18,7 +19,7 @@
 .Modal-name {
   margin-bottom: 20px;
   color: white;
-  font-size: 56px;
+  font-size: 300%;
   font-family: Lexend-Deca;
 }
 .Modal-content {
@@ -26,11 +27,18 @@
   background: radial-gradient(#83ffff, #3ce2e2);
   border-radius: 16px;
   min-width: 250px;
+}
 
+.Modal-centered {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.Modal-centered > p {
+  color: white;
+  font-size: 20px;
 }
 
 .Modal-content > * {
@@ -39,4 +47,5 @@
 
 .Modal-content > button {
   margin-top: 15px;
+  float: right;
 }

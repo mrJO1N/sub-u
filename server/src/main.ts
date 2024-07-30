@@ -8,7 +8,8 @@ import ErrorHandler from "./middlewares/ErrorHandler";
 const app = express();
 dotenv.config();
 
-const PORT = Number(process.env.PORT ?? 80);
+const PORT = Number(process.env.PORT ?? 80),
+  HOSTNAME = process.env.PORT ?? "localhost";
 app.use(cors());
 app.use(express.json());
 
@@ -19,8 +20,8 @@ async function startServer() {
   await sequelize.sync();
   await sequelize.authenticate();
 
-  app.listen(PORT, () =>
-    console.log(`Server is running on port ${PORT}.http://localhost:${PORT}`)
+  app.listen(PORT, HOSTNAME, () =>
+    console.log(`Server is running on port ${PORT}.http://${HOSTNAME}:${PORT}`)
   );
 }
 

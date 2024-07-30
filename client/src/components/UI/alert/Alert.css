@@ -1,0 +1,80 @@
+@font-face {
+  font-family: Lexend-Deca;
+  src: url("../../../../public/fonts/Lexend_Deca/LexendDeca-VariableFont_wght.ttf");
+}
+
+.Alert {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+}
+.Alert > * {
+  z-index: 10;
+}
+
+.Alert.active {
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Alert.active.mount {
+  animation: Alert-run 0.8s;
+  animation-timing-function: ease-in-out;
+  animation-direction: normal;
+}
+
+.Alert.active.unmount {
+  animation: Alert-end 1s;
+  animation-timing-function: ease-out;
+}
+
+@keyframes Alert-run {
+  from {
+    background: rgba(0, 0, 0, 0.1);
+    top: -1000px;
+  }
+  to {
+    background: rgba(0, 0, 0, 0.8);
+    top: 0;
+  }
+}
+@keyframes Alert-end {
+  from {
+    background: rgba(0, 0, 0, 0.8);
+    top: 0;
+  }
+  to {
+    background: rgba(0, 0, 0, 0.1);
+    top: -1000px;
+  }
+}
+
+/* @keyframes Alert-run {
+  0% {
+    top: -1000px;
+  }
+  50% {
+    top: -500px;
+  }
+  100% {
+    top: 0;
+  }
+} */
+/* @keyframes Alert-end {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: -500px;
+  }
+  100% {
+    top: -1000px;
+  }
+} */

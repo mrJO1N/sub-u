@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import { privateRoutes, publicRoutes } from "../router/main";
 // import { AuthContext } from "../context/main";
@@ -22,16 +21,11 @@ function AppRouter() {
             />
           );
         })}
-      {!isAuth &&
-        publicRoutes.map((route) => {
-          return (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={route.component}
-            />
-          );
-        })}
+      {publicRoutes.map((route) => {
+        return (
+          <Route key={route.path} path={route.path} element={route.component} />
+        );
+      })}
     </Routes>
   );
 }

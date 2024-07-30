@@ -19,3 +19,9 @@
 
 - add some home page
 - add routing
+
+## 0.4.5
+
+_(for testing client-server integration)_
+
+- add login page with some animations
