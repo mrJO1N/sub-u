@@ -9,7 +9,7 @@ const app = express();
 dotenv.config();
 
 const PORT = Number(process.env.PORT ?? 80),
-  HOSTNAME = process.env.PORT ?? "localhost";
+  // HOSTNAME = process.env.PORT ?? "localhost";
 app.use(cors());
 app.use(express.json());
 
@@ -20,7 +20,7 @@ async function startServer() {
   await sequelize.sync();
   await sequelize.authenticate();
 
-  app.listen(PORT, HOSTNAME, () =>
+  app.listen(PORT, () =>
     console.log(`Server is running on port ${PORT}.http://${HOSTNAME}:${PORT}`)
   );
 }
