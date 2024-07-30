@@ -21,7 +21,7 @@ async function startServer() {
   await sequelize.authenticate();
 
   app.listen(PORT, () =>
-    console.log(`Server is running on port ${PORT}.http://${HOSTNAME}:${PORT}`)
+    console.log(`Server is running on port ${PORT}.http://localhost:${PORT}`)
   );
 }
 
