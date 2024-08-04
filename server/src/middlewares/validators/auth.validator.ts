@@ -15,7 +15,9 @@ class AuthValidator {
     try {
       const JWT_SECRET = process.env.JWT_SECRET ?? "";
       const decoded = jwt.verify(token, JWT_SECRET);
+
       // give decoded to next controller or middleware
+      req.body.__user = decoded;
       next();
     } catch (err) {
       return res.status(403).json({ message: "Invalid token" });

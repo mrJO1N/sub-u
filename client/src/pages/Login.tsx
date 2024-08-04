@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Joi from "joi";
 import userService from "../API/user.service";
 import { UI } from "../components/UI/main";
-import { Link } from "react-router-dom";
-import cookie from "../utils/cookie";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
+  const { setUserToken, setIsAuth } = useContext(AuthContext);
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState<string | null>(null);
 
@@ -18,11 +21,14 @@ function Login() {
     const { error } = formDataSchema.validate(formData, { abortEarly: false });
     if (error) return setError(error.message);
 
-    userService.userLogin(formData.email, formData.password).then((data) => {
-      cookie.clear();
-
-      if (data.message) return console.error(data.message);
-      if (data.token) cookie.setData({ token: data.token });
+    userService.userLogin(formData.email, formData.password).then((resData) => {
+      if (resData.message) return console.error(resData.message);
+      if (resData.token) {
+        localStorage.setItem("token", resData.token);
+        if (setUserToken) setUserToken(resData.token);
+        if (setIsAuth) setIsAuth(true);
+      }
+      navigate("/");
     });
   };
 

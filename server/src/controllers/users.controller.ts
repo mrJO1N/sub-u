@@ -41,10 +41,7 @@ class UsersController {
     res.json({ token });
   }
   async login(req: Request, res: Response, next: NextFunction) {
-    const {
-      email,
-      password,
-    }: { email: string; password: string; name: string } = req.body;
+    const { email, password }: { email: string; password: string } = req.body;
 
     const user = await models.User.findOne({ where: { email } });
 

@@ -37,3 +37,8 @@ _(for testing client-server integration)_
 
 - now client is hosted
 - fix now only one Header node
+
+## 0.5.1
+
+- add react context
+- add auth mechanism for check token

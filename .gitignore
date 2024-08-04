@@ -2,6 +2,7 @@
 **/dist
 **/build
 **/.env
+**/dev.env
 **/.dev.env
 **/secret
 /.$db.html.bkp
