@@ -42,3 +42,12 @@ _(for testing client-server integration)_
 
 - add react context
 - add auth mechanism for check token
+
+## 0.5.2
+
+- frontend:
+- - add developments of ui of addicted menu under header element
+- - add functional for getting balance from server
+
+- backend:
+- - add route for check balance

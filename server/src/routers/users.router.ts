@@ -10,5 +10,6 @@ router.post("/reg", usersValidator.reg, usersController.reg);
 router.get("/auth", authValidator.checkToken, (req, res) => {
   res.send();
 });
+router.get("/balance", authValidator.checkToken, usersController.getBalance);
 
 export default router;

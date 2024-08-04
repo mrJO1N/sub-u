@@ -49,9 +49,22 @@ export async function checkToken(userToken: string) {
   }
 }
 
+export async function getBalance(userToken: string) {
+  let balance: number | undefined = 0;
+  try {
+    balance = await axios
+      .get(`${SERVER_HOST_URL}/api/users/balance`, {
+        headers: { Authorization: "test " + userToken },
+      })
+      .then((res) => res?.data.balance);
+  } finally {
+    return balance;
+  }
+}
+
 interface resData {
   token?: string;
   message?: string;
 }
 
-export default { checkToken, userLogin, userReg };
+export default { checkToken, userLogin, userReg, getBalance };
