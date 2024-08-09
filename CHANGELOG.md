@@ -62,3 +62,12 @@ _(for testing client-server integration)_
 
 - - add developments of transfers with qr
 - - add simple transfers
+
+## 0.5.5
+
+- frontend:
+- - fix .addict-menu in css
+- - add transfers page without backend yet
+
+- backend:
+- - add package "forever" for prod

@@ -43,12 +43,12 @@ function App() {
       >
         <BrowserRouter>
           {isAuth ? (
-            <Header menuList={[{ url: "/transfer", label: "transfer" }]} />
+            <Header menuList={[{ url: "/transfers", label: "transfer" }]} />
           ) : (
             <Header
               menuList={[
                 { url: "/login", label: "sigh in" },
-                { url: "/transfer", label: "transfer" },
+                { url: "/transfers", label: "transfer" },
               ]}
             />
           )}

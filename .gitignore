@@ -6,3 +6,6 @@
 **/.dev.env
 **/secret
 /.$db.html.bkp
+TODO.md
+
+**/logger.ts
