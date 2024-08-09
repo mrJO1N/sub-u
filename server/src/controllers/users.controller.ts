@@ -30,7 +30,7 @@ class UsersController {
       password: hashedPassword,
       name,
       role: "USER",
-      balance: 0,
+      balance: 100,
       // emailIsVerified: false,
     });
 

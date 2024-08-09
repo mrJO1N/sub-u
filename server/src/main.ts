@@ -9,7 +9,7 @@ const app = express();
 dotenv.config();
 
 const PORT = Number(process.env.PORT ?? 80);
-  // HOSTNAME = process.env.PORT ?? "localhost";
+// HOSTNAME = process.env.PORT ?? "localhost";
 app.use(cors());
 app.use(express.json());
 

@@ -3,6 +3,7 @@ import "../styles/Header.css";
 import { MenuItemI, whenAuthI } from "../types";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import AvatarIcon from "./AvatarIcon";
 
 function Header(
   props: HTMLAttributes<HTMLDivElement> & { menuList: MenuItemI[] }
@@ -33,34 +34,30 @@ function Header(
               </li>
             );
           })}
-          <li>
-            <span className="dollar">$</span>
-            <span className="balance">{userBalance}</span>
-          </li>
           {isAuth && (
-            <li>
-              <img
-                className="avatar-icon"
-                src="https://cdn.onlinewebfonts.com/svg/img_568656.png"
-                alt="ava"
-                height={72}
-                width={72}
-              />
-            </li>
+            <>
+              <li>
+                <span className="dollar">$</span>
+                <span className="balance">{userBalance}</span>
+              </li>
+              <li>
+                <AvatarIcon height={72} width={72} />
+              </li>
+            </>
           )}
         </ul>
       </div>
-      <div className="addict-menu-root">
-        <div className="addict-menu">
-          {whenAuth.avatarProps &&
-            whenAuth.avatarProps.menu.map((menuItem) => {
-              return (
-                <li key={menuItem.url}>
-                  <Link to={menuItem.url}>{menuItem.label}</Link>
-                </li>
-              );
-            })}
-        </div>
+      {/* <div className="addict-menu-root"> */}
+      <div className="addict-menu">
+        {whenAuth.avatarProps &&
+          whenAuth.avatarProps.menu.map((menuItem) => {
+            return (
+              <li key={menuItem.url}>
+                <Link to={menuItem.url}>{menuItem.label}</Link>
+              </li>
+            );
+          })}
+        {/* </div> */}
       </div>
     </header>
   );

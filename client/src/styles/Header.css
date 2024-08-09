@@ -47,7 +47,7 @@
 } */
 
 .addict-menu {
-  background: #0fe;
+  /* background: #0fe;
   height: 180px;
   float: right;
   position: relative;
@@ -55,12 +55,12 @@
   margin-top: 80px;
   padding: 0 15px;
   list-style: none;
-  font-size: 32px;
+  font-size: 32px; */
 
-  display: none;
-  /* display: flex; */
+  /* display: none; */
+  /* display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-evenly; */
 }
 
 .menu > li > span {
@@ -69,4 +69,12 @@
 }
 .menu > li > span.balance {
   color: #004242;
+}
+
+.addict-menu {
+  display: none;
+}
+
+.avatar-icon:hover + .addict-menu {
+  display: flex;
 }

@@ -51,3 +51,14 @@ _(for testing client-server integration)_
 
 - backend:
 - - add route for check balance
+
+## 0.5.3
+
+- frontend:
+
+- - add developments of settings page ( /settings )
+
+- backend:
+
+- - add developments of transfers with qr
+- - add simple transfers

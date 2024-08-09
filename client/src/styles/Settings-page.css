@@ -1,0 +1,59 @@
+.Settings-page {
+  display: flex;
+}
+.left-panel {
+  background: rgba(60, 226, 226, 0.6);
+  width: 20vw;
+  height: calc(100vh - 80px);
+}
+
+.left-panel-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  list-style: none;
+  font-size: 48px;
+}
+
+.page-container {
+  display: flex;
+}
+
+.avatar-editor {
+  margin: 30px 60px;
+  display: flex;
+  flex-direction: column;
+}
+.avatar-editor > button {
+  height: 50px;
+}
+
+.user-data-editor {
+  background: rgba(60, 226, 226, 0.3);
+  padding: 20px;
+  margin: 30px 25px;
+  height: 300px;
+  width: 700px;
+  font-family: Kreon-bold;
+
+  border-radius: 17px;
+}
+
+.user-data-editor > .editor {
+  margin-left: 4vw;
+  margin-top: 3vh;
+  display: flex;
+}
+
+.editor > .field-names,
+.field-inputs {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-data-editor > .editor > .field-names > * {
+  margin-bottom: 10px;
+}
