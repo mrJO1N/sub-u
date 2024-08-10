@@ -8,7 +8,8 @@ const router = Router();
 router.post("/login", usersValidator.login, usersController.login);
 router.post("/reg", usersValidator.reg, usersController.reg);
 router.get("/auth", authValidator.checkToken, (req, res) => {
-  res.send("lolo");
+  res.send();
 });
+router.get("/balance", authValidator.checkToken, usersController.getBalance);
 
 export default router;

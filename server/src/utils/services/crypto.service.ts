@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 import crypto from "crypto";
 dotenv.config();
 
-const SECRET_KEY = process.env.SECRET_KEY ?? "key",
-  SECRET_IV = process.env.SECRET_IV ?? "message",
+const SECRET_KEY = process.env.SECRET_KEY ?? "react",
+  SECRET_IV = process.env.SECRET_IV ?? "express",
   ENCRYPT_METHOD = process.env.ENCRYPT_METHOD ?? "aes-256-cbc";
 
 // Generate secret hash with crypto to use for encryption

@@ -37,3 +37,37 @@ _(for testing client-server integration)_
 
 - now client is hosted
 - fix now only one Header node
+
+## 0.5.1
+
+- add react context
+- add auth mechanism for check token
+
+## 0.5.2
+
+- frontend:
+- - add developments of ui of addicted menu under header element
+- - add functional for getting balance from server
+
+- backend:
+- - add route for check balance
+
+## 0.5.3
+
+- frontend:
+
+- - add developments of settings page ( /settings )
+
+- backend:
+
+- - add developments of transfers with qr
+- - add simple transfers
+
+## 0.5.5
+
+- frontend:
+- - fix .addict-menu in css
+- - add transfers page without backend yet
+
+- backend:
+- - add package "forever" for prod

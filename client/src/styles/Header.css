@@ -26,3 +26,34 @@
   margin-right: 30px;
   font-size: 40px;
 }
+
+.addict-menu {
+  background: #0fe;
+  height: 180px;
+  float: right;
+  position: relative;
+  top: -80px;
+  margin-top: 80px;
+  padding: 0 15px;
+  list-style: none;
+  font-size: 32px;
+  display: none;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.addict-menu:hover {
+  display: flex;
+}
+
+.Header:has(.menu li:hover > .avatar-icon) + .addict-menu {
+  display: flex;
+}
+
+.menu > li > span {
+  color: #000;
+  font-family: Kreon-Bold;
+}
+.menu > li > span.balance {
+  color: #004242;
+}

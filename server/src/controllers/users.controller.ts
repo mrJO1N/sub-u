@@ -30,7 +30,7 @@ class UsersController {
       password: hashedPassword,
       name,
       role: "USER",
-      balance: 0,
+      balance: 100,
       // emailIsVerified: false,
     });
 
@@ -41,10 +41,7 @@ class UsersController {
     res.json({ token });
   }
   async login(req: Request, res: Response, next: NextFunction) {
-    const {
-      email,
-      password,
-    }: { email: string; password: string; name: string } = req.body;
+    const { email, password }: { email: string; password: string } = req.body;
 
     const user = await models.User.findOne({ where: { email } });
 
@@ -65,7 +62,15 @@ class UsersController {
     res.json({ token });
   }
 
-  async getJWT(req: Request, res: Response, next: NextFunction) {}
+  // async getJWT(req: Request, res: Response, next: NextFunction) {}
+  async getBalance(req: Request, res: Response, next: NextFunction) {
+    const userId = req.body.__user.id;
+    const user = await models.User.findByPk(userId);
+    if (!user) {
+      return next(ApiError.badRequest("User not found"));
+    }
+    res.json({ balance: user.dataValues.balance });
+  }
 }
 
 export default new UsersController();

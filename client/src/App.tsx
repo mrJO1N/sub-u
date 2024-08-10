@@ -1,33 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
+import { AuthContext } from "./context/AuthContext";
+import userService from "./API/user.service";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
-// import firebase from "firebase/app";
-// import firebaseSecret from "./firebaseSecret.json";
 import Header from "./components/Header";
-
-// firebase.initializeApp({
-//   apiKey: firebaseSecret.apiKey,
-//   authDomain: firebaseSecret.authDomain,
-//   projectId: firebaseSecret.projectId,
-//   storageBucket: firebaseSecret.storageBucket,
-//   messagingSenderId: firebaseSecret.messagingSenderId,
-//   appId: firebaseSecret.appId,
-//   measurementId: firebaseSecret.measurementId,
-// });
+import { UserI } from "./types";
 
 function App() {
+  const [userToken, setUserToken] = useState("");
+  const [isAuth, setIsAuth] = useState(false);
+  const [userData, setUserData] = useState<UserI>({ balance: 0 });
+
+  useEffect(() => {
+    if (setIsAuth) setIsAuth(false);
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      userService.checkToken(token).then((data) => {
+        if (data.message) return console.error(data.message);
+        setUserToken(token);
+        if (setIsAuth) setIsAuth(true);
+      });
+      userService.getBalance(token).then((balance) => {
+        setUserData({ ...userData, balance: balance ?? 0 });
+      });
+      // setUserData({ ...userData, balance: 100 });
+    }
+  }, []);
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header
-          menuList={[
-            { url: "/login", label: "sigh in" },
-            { url: "/i", label: "transfer" },
-          ]}
-        />
-        <AppRouter />
-      </BrowserRouter>
+      <AuthContext.Provider
+        value={{
+          userToken,
+          setUserToken,
+          isAuth,
+          setIsAuth,
+          userData,
+          setUserData,
+        }}
+      >
+        <BrowserRouter>
+          {isAuth ? (
+            <Header menuList={[{ url: "/transfers", label: "transfer" }]} />
+          ) : (
+            <Header
+              menuList={[
+                { url: "/login", label: "sigh in" },
+                { url: "/transfers", label: "transfer" },
+              ]}
+            />
+          )}
+          <AppRouter />
+        </BrowserRouter>
+      </AuthContext.Provider>
     </div>
   );
 }

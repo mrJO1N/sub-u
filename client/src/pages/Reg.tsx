@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Joi from "joi";
+import { AuthContext } from "../context/AuthContext";
 import userService from "../API/user.service";
 import { UI } from "../components/UI/main";
-import { Link } from "react-router-dom";
-import cookie from "../utils/cookie";
+import { Link, useNavigate } from "react-router-dom";
 
-function Login() {
+function Reg() {
+  const { setUserToken, setIsAuth } = useContext(AuthContext);
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -37,7 +40,10 @@ function Login() {
     }
 
     if (resData.token) {
-      cookie.setData({ token: resData.token });
+      localStorage.setItem("token", resData.token);
+      if (setUserToken) setUserToken(resData.token);
+      if (setIsAuth) setIsAuth(true);
+      navigate("/");
     }
   };
 
@@ -91,4 +97,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Reg;
