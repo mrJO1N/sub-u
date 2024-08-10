@@ -71,3 +71,14 @@ _(for testing client-server integration)_
 
 - backend:
 - - add package "forever" for prod
+
+## 0.5.6
+
+- frontend:
+- - add configs for prod and dev
+
+- backend:
+- - add logger
+
+- bot:
+- - add developments of init

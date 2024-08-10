@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { logAllRight } from "../utils/logger";
 import { generateQRToken } from "../utils/QRTokens";
 import conn from "../db/conn";
 import { ApiError } from "../errors/API.error";
@@ -39,6 +40,7 @@ class TransfersController {
 
     const result = await transaction.commit();
 
+    logAllRight(req.url);
     res.send(result);
   }
   async requestQR(req: Request, res: Response, next: NextFunction) {

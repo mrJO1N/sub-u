@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import { logAllRight } from "../utils/logger";
 import { ApiError } from "../errors/API.error";
 import { models } from "../db/models";
 
@@ -38,6 +39,8 @@ class UsersController {
 
     const userFields = user.dataValues;
     const token = generateJwt(userFields.id, email, userFields.role);
+
+    logAllRight(req.url);
     res.json({ token });
   }
   async login(req: Request, res: Response, next: NextFunction) {
@@ -59,6 +62,7 @@ class UsersController {
     // }
 
     const token = generateJwt(userFields.id, email, userFields.role);
+    logAllRight(req.url);
     res.json({ token });
   }
 
@@ -69,6 +73,8 @@ class UsersController {
     if (!user) {
       return next(ApiError.badRequest("User not found"));
     }
+
+    logAllRight(req.url);
     res.json({ balance: user.dataValues.balance });
   }
 }
