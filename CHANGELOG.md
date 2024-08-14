@@ -82,3 +82,12 @@ _(for testing client-server integration)_
 
 - bot:
 - - add developments of init
+
+## 0.5.7
+
+- backend:
+- - add api setup between bot and server
+
+- bot:
+- - add more developments of bot
+- - add api setup between bot and server

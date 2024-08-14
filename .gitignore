@@ -7,3 +7,6 @@
 **/secret
 /.$db.html.bkp
 TODO.md
+**/sessions.json
+
+/spec bot

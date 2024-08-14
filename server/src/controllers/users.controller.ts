@@ -10,50 +10,83 @@ dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET ?? "";
 
-const generateJwt = (userId: number, email: string, role: string) =>
-  jwt.sign({ id: userId, email, role }, JWT_SECRET, {
+type generateJwtOptions = { id: number; email?: string; role: string };
+const generateJwt = ({ id, email, role }: generateJwtOptions) =>
+  jwt.sign({ id, email, role }, JWT_SECRET, {
     expiresIn: "24h",
   });
 
 class UsersController {
   async reg(req: Request, res: Response, next: NextFunction) {
-    const { email, password, name } = req.body;
+    const { email, password, name, specPassword } = req.body;
 
-    const candidate = await models.User.findOne({ where: { email } });
-    if (candidate) {
-      return next(ApiError.badRequest("this email is already in use"));
+    if (specPassword) {
+      const candidate = await models.User.findOne({ where: { name } });
+      if (candidate) {
+        return next(ApiError.badRequest("this bot name is already in use"));
+      }
+      const hashedPassword = await bcrypt.hash(specPassword, 10);
+
+      const user = await models.User.create({
+        email: "",
+        password: hashedPassword,
+        name,
+        role: "BOT",
+        balance: 10_000,
+        // emailIsVerified: false,
+      });
+
+      if (!user) return next(ApiError.internal("registration failed"));
+
+      const userFields = user.dataValues;
+      const token = generateJwt({
+        id: userFields.id,
+        role: userFields.role,
+      });
+
+      logAllRight(req.url);
+      res.json({ token });
+    } else if (email && password) {
+      const candidate = await models.User.findOne({ where: { email } });
+      if (candidate) {
+        return next(ApiError.badRequest("this email is already in use"));
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const user = await models.User.create({
+        email,
+        password: hashedPassword,
+        name,
+        role: "USER",
+        balance: 100,
+        // emailIsVerified: false,
+      });
+
+      if (!user) return next(ApiError.internal("registration failed"));
+
+      const userFields = user.dataValues;
+      const token = generateJwt({
+        id: userFields.id,
+        email,
+        role: userFields.role,
+      });
+
+      logAllRight(req.url);
+      res.json({ token });
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const user = await models.User.create({
-      email,
-      password: hashedPassword,
-      name,
-      role: "USER",
-      balance: 100,
-      // emailIsVerified: false,
-    });
-
-    if (!user) return next(ApiError.internal("registration failed"));
-
-    const userFields = user.dataValues;
-    const token = generateJwt(userFields.id, email, userFields.role);
-
-    logAllRight(req.url);
-    res.json({ token });
   }
   async login(req: Request, res: Response, next: NextFunction) {
-    const { email, password }: { email: string; password: string } = req.body;
+    const { name, password }: { name: string; password: string } = req.body;
 
-    const user = await models.User.findOne({ where: { email } });
+    const user = await models.User.findOne({ where: { name } });
 
     if (!user) {
-      return next(ApiError.badRequest("Invalid email or password"));
+      return next(ApiError.badRequest("Invalid name"));
     }
     const userFields = user.dataValues;
 
-    if (!(await bcrypt.compare(password, userFields.password))) {
+    if (!user || !(await bcrypt.compare(password, userFields.password))) {
       return next(ApiError.badRequest("Invalid email or password"));
     }
 
@@ -61,7 +94,11 @@ class UsersController {
     //   return next(ApiError.forBidden("Email not verified"));
     // }
 
-    const token = generateJwt(userFields.id, email, userFields.role);
+    const token = generateJwt({
+      id: userFields.id,
+      email: userFields.email,
+      role: userFields.role,
+    });
     logAllRight(req.url);
     res.json({ token });
   }

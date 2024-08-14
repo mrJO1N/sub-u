@@ -4,36 +4,55 @@ import { ApiError } from "../../errors/API.error";
 
 class UsersValidator {
   async login(req: Request, res: Response, next: NextFunction) {
-    const { email, password } = req.body;
+    const { name, password } = req.body;
 
-    if (!email || !password)
-      return next(ApiError.badRequest("missing email or password"));
+    // if (!name || !password)
+    //   return next(ApiError.badRequest("missing name or password"));
 
     const bodyRequired = Joi.object({
-      email: Joi.string().email().required(),
+      name: Joi.string().required(),
       password: Joi.string().required(),
     });
 
-    const { error } = bodyRequired.validate({ email, password });
+    const { error } = bodyRequired.validate({ name, password });
     if (error) return next(ApiError.badRequest(error.message));
 
     next();
   }
 
   async reg(req: Request, res: Response, next: NextFunction) {
-    const { email, password, name } = req.body;
+    const { email, password, name, specPassword } = req.body;
 
-    if (!email || !password || !name)
-      return next(ApiError.badRequest("missing email, name or password"));
+    if (!name) return next(ApiError.badRequest("missing name"));
 
-    const bodyRequired = Joi.object({
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
-      name: Joi.string().required(),
-    });
+    type bodyRequiredT = {
+      name: string;
+      specPassword?: string;
+      email?: string;
+      password?: string;
+    };
 
-    const { error } = bodyRequired.validate({ email, password, name });
-    if (error) return next(ApiError.badRequest(error.message));
+    let bodyRequired: Joi.ObjectSchema<bodyRequiredT>;
+
+    if (specPassword) {
+      bodyRequired = Joi.object({
+        specPassword: Joi.string(),
+        name: Joi.string(),
+      });
+
+      const { error } = bodyRequired.validate({ specPassword, name });
+      if (error) return next(ApiError.badRequest(error.message));
+    } else if (email && password) {
+      bodyRequired = Joi.object({
+        email: Joi.string().email(),
+        password: Joi.string(),
+        name: Joi.string(),
+      });
+
+      const { error } = bodyRequired.validate({ email, password, name });
+      if (error) return next(ApiError.badRequest(error.message));
+    } else
+      return next(ApiError.badRequest("missing name, or password, or email"));
 
     next();
   }
