@@ -12,6 +12,7 @@ class ConfigService implements ConfigServiceI {
       this.config = parsedConfig;
     } catch (err) {
       dotenv.config();
+      if (!Object(process.env).keys) throw err;
       for (const key of Object(process.env).keys()) {
         this.config[key] = process.env[key] ?? "";
       }
