@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import axios from "axios";
+import prodConfig from "../config/prod.config.json";
+import devConfig from "../config/dev.config.json";
 import { AuthContext } from "../context/AuthContext";
 
-const SERVER_HOST_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://sub-u.onrender.com"
-    : "http://localhost:8000";
+const config = process.env.NODE_ENV === "production" ? prodConfig : devConfig;
 
 export async function makeTransfer(
   username: string,
@@ -16,7 +15,7 @@ export async function makeTransfer(
   try {
     data = await axios
       .post(
-        `${SERVER_HOST_URL}/api/transfers/make-to`,
+        `${config.SERVER_HOST_URL}/api/transfers/make-to`,
         {
           username,
           amount,

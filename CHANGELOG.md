@@ -71,3 +71,35 @@ _(for testing client-server integration)_
 
 - backend:
 - - add package "forever" for prod
+
+## 0.5.6
+
+- frontend:
+- - add configs for prod and dev
+
+- backend:
+- - add logger
+
+- bot:
+- - add developments of init
+
+## 0.5.7
+
+- backend:
+- - add api setup between bot and server
+
+- bot:
+- - add more developments of bot
+- - add api setup between bot and server
+
+## 0.6.0
+
+- general:
+- - fix readme
+- - add deposit mechanism
+
+- bot:
+- - add reg / login
+
+- client:
+- - fix login page. now must enter name, not email
