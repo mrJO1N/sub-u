@@ -9,11 +9,11 @@ function Login() {
   const { setUserToken, setIsAuth } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ name: "", password: "" });
   const [error, setError] = useState<string | null>(null);
 
   const formDataSchema = Joi.object({
-    email: Joi.string().email({ tlds: false }),
+    name: Joi.string(),
     password: Joi.string().min(5),
   });
 
@@ -21,7 +21,7 @@ function Login() {
     const { error } = formDataSchema.validate(formData, { abortEarly: false });
     if (error) return setError(error.message);
 
-    userService.userLogin(formData.email, formData.password).then((resData) => {
+    userService.userLogin(formData.name, formData.password).then((resData) => {
       if (resData.message) return console.error(resData.message);
       if (resData.token) {
         localStorage.setItem("token", resData.token);
@@ -44,10 +44,10 @@ function Login() {
       )}
       <UI.Modal name="login" className="active">
         <UI.Input
-          placeholder="email"
-          type="email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          placeholder="name"
+          type="text"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
         <UI.Input
           placeholder="password"

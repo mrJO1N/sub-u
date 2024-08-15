@@ -4,6 +4,6 @@ import depositController from "../controllers/deposit.controller";
 
 const router = Router();
 
-router.get("/10", authValidator.checkToken, depositController.deposit);
+router.post("/10", authValidator.checkToken, depositController.deposit);
 
 export default router;

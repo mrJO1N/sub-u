@@ -13,10 +13,10 @@ class ConfigService implements ConfigServiceI {
     this.config = parsedConfig;
   }
 
-  get(key: string): string {
+  get(key: string) {
     const res = this.config[key];
 
-    if (!res) throw new Error(`Key "${key}" not found in.env`);
+    if (!res) return;
     return res;
   }
 

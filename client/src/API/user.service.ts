@@ -24,11 +24,11 @@ export async function userReg(
     return data;
   }
 }
-export async function userLogin(email: string, password: string) {
+export async function userLogin(name: string, password: string) {
   let data: resData = {};
   try {
     data = await axios
-      .post(`${config.SERVER_HOST_URL}/api/users/login`, { email, password })
+      .post(`${config.SERVER_HOST_URL}/api/users/login`, { name, password })
       .then((res) => res?.data);
   } finally {
     return data;

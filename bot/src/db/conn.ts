@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import { config } from "../services/config/config.service";
+import { config } from "../services/config/config.service.js";
 
 export default new Sequelize({
   dialect: "postgres",

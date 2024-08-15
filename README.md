@@ -16,6 +16,11 @@ see this on https://sub-u-vmv8.onrender.com
 - jwt
 - joi
 
+### stack telegram bot:
+
+- telegraf
+- axios
+
 backend hosted on render.com  
 ( https://sub-u.onrender.com )
 

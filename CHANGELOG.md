@@ -91,3 +91,15 @@ _(for testing client-server integration)_
 - bot:
 - - add more developments of bot
 - - add api setup between bot and server
+
+## 0.6.0
+
+- general:
+- - fix readme
+- - add deposit mechanism
+
+- bot:
+- - add reg / login
+
+- client:
+- - fix login page. now must enter name, not email
