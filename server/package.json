@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/main.ts",
   "scripts": {
-    "start": "forever ./dist/main.js",
+    "start": "node ./dist/main.js",
     "strt": "node --loader ts-node/esm ./src/main.ts",
     "build": "rimraf ./dist && tsc",
     "dev": "nodemon"
@@ -27,7 +27,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "forever": "^4.0.3",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.12.0",
