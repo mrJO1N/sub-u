@@ -2,20 +2,16 @@ import { ConfigServiceI } from "./config.interface.js";
 import dotenv, { config as dotenvConfig, DotenvParseOutput } from "dotenv";
 
 class ConfigService implements ConfigServiceI {
-  private config: IConfig;
+  private config: IConfig = {};
 
   constructor() {
     try {
-      const { error, parsed: parsedConfig } = dotenvConfig();
-      if (error) throw error;
-      if (!parsedConfig) throw new Error(".env is empty");
-      this.config = parsedConfig;
-    } catch (err) {
       dotenv.config();
-      if (!Object(process.env).keys) throw err;
-      for (const key of Object(process.env).keys()) {
+      for (const key in process.env) {
         this.config[key] = process.env[key] ?? "";
       }
+    } catch (err) {
+      throw err;
     }
   }
 
