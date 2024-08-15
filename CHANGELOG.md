@@ -103,3 +103,7 @@ _(for testing client-server integration)_
 
 - client:
 - - fix login page. now must enter name, not email
+
+## 0.6.0 fix
+
+fix config service in bot and server
