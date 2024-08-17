@@ -107,3 +107,9 @@ _(for testing client-server integration)_
 ## 0.6.0 fix
 
 fix config service in bot and server
+
+## 0.6.1
+
+- bot:
+- - add logger
+- - full refactoring

@@ -18,5 +18,7 @@ const logger = createLogger({
 });
 
 export const logAllRight = (msg?: string) => logger.info(`${msg ?? ""} -> ok`);
+export const logRunAction = (msg?: string) =>
+  logger.info(`${msg ?? ""} -> run action`);
 
 export default logger;
