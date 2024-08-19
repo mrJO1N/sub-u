@@ -1,12 +1,13 @@
 import { Telegraf } from "telegraf";
 import localStorage from "telegraf-session-local";
 import sequelize from "./db/conn.js";
-// import logger from "./utils/logger.js";
+import logger from "./utils/logger.js";
 import subUService from "./services/API/subU.service.js";
 import { BotContextI } from "./context/context.interface.js";
 import { Command } from "./commands/command.class.js";
 import { config } from "./services/config/config.service.js";
 import { StartCommand } from "./commands/start.command.js";
+import { DepositActionsCommand } from "./commands/deposit.actions.js";
 import { ConfigServiceI } from "./services/config/config.interface.js";
 
 class Bot {
@@ -29,13 +30,17 @@ class Bot {
         .catch((err) => {});
     });
 
-    this.commands = [new StartCommand(this.bot)];
+    this.commands = [
+      new StartCommand(this.bot),
+      new DepositActionsCommand(this.bot),
+    ];
 
     for (const command of this.commands) {
       command.handle();
     }
 
     this.bot.launch();
+    logger.info("Bot started");
   }
 }
 

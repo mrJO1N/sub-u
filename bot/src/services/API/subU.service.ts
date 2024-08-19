@@ -2,13 +2,20 @@ import axios from "axios";
 import { config } from "../config/config.service.js";
 
 export const deposit10 = async (toUsername: string) => {
-  return await axios.post(
-    `${config.get("SUBU_URL")}/api/deposit/10`,
-    { toUser: toUsername },
-    {
-      headers: { Authorization: `user ${config.get("JWT_TOKEN")}` },
-    }
-  );
+  let resData: {} = {};
+  try {
+    resData = await axios
+      .post(
+        `${config.get("SUBU_URL")}/api/deposit/10`,
+        { toUser: toUsername },
+        {
+          headers: { Authorization: `user ${config.get("JWT_TOKEN")}` },
+        }
+      )
+      .then((res) => res.data);
+  } finally {
+    return resData;
+  }
 };
 
 export const checkJWT = async () => {

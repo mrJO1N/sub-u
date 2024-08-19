@@ -1,26 +1,19 @@
 import { DataTypes, ModelDefined, Optional } from "sequelize";
 import sequelize from "../conn.js";
 
-const User: ModelDefined<UserAttrI, UserCreationAttrI> = sequelize.define(
-  "bot-user",
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    name: { type: DataTypes.STRING, unique: true },
-    tgId: { type: DataTypes.BIGINT, unique: true },
-  }
-);
+const User: UserModel = sequelize.define("bot-user", {
+  tgId: { type: DataTypes.BIGINT, unique: true, primaryKey: true },
+  name: { type: DataTypes.STRING, unique: true },
+});
 
-interface UserAttrI {
-  id: number;
+export type UserModel = ModelDefined<UserAttrI, UserCreationAttrI>;
+
+export interface UserAttrI {
   name: string;
   tgId: number;
 }
 
-interface UserCreationAttrI extends Optional<UserAttrI, "id"> {
+interface UserCreationAttrI extends Optional<UserAttrI, "tgId"> {
   name: string;
   tgId: number;
 }
