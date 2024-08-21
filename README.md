@@ -15,6 +15,7 @@ see this on https://sub-u-vmv8.onrender.com
 - sequelize
 - jwt
 - joi
+- winston
 
 ### stack telegram bot:
 

@@ -113,3 +113,18 @@ fix config service in bot and server
 - bot:
 - - add logger
 - - full refactoring
+
+## 0.6.2
+
+- bot:
+- - add subUService logging
+- - add anti-blocking for render.com
+
+back:
+
+- add plug routes for /api/users
+
+front:
+
+- fix requests on starting
+- add DropDownMenu.tsx

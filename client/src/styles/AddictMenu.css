@@ -1,0 +1,22 @@
+.addict-menu ul {
+  list-style: none;
+}
+
+.addict-menu {
+  display: none;
+  background: #0fe;
+  height: 180px;
+  float: right;
+  padding: 0 15px;
+  font-size: 32px;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.addict-menu:hover {
+  display: flex;
+}
+
+.Header:has(.menu li:hover > .avatar-icon) + .addict-menu.addict_avatar-icon {
+  display: flex;
+}

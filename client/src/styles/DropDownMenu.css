@@ -1,0 +1,19 @@
+.dropdown-root:hover {
+  background: rgb(27, 255, 240);
+}
+
+.dropdown-root:hover .dropdown-content {
+  display: flex;
+}
+
+.dropdown-content {
+  /* margin-top: 179px; */
+
+  background: #0fe;
+  display: none;
+  position: fixed;
+  margin-top: -1px;
+  font-size: 32px;
+  padding: 0 15px;
+  min-height: 180px;
+}

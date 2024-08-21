@@ -1,12 +1,10 @@
-export interface MenuItemI {
+export interface IMenuItem {
   url: string;
   label: string;
 }
-
-export interface whenAuthI {
-  avatarProps?: {
-    menu: MenuItemI[];
-  };
+export interface IMenuOptItem {
+  options: IMenuItem[];
+  label: string;
 }
 
 export interface UserI {

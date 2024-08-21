@@ -17,7 +17,6 @@ export class StartCommand extends Command {
         ctx.session.userModelAttr = userCandidateDatavalues;
 
       let myInlineKeyboard;
-
       if (ctx.session.userModelAttr)
         myInlineKeyboard = Markup.inlineKeyboard([
           Markup.button.callback("deposit 10", "deposit 10 new"),
@@ -27,7 +26,6 @@ export class StartCommand extends Command {
         "Hello! I'm a subU bot. \nI will help you deposit subers to your balance in the subU system",
         myInlineKeyboard
       );
-
       if (!ctx.session.userModelAttr)
         ctx.reply("say your subU username to continue:");
     });
@@ -44,7 +42,7 @@ export class StartCommand extends Command {
       ).dataValues;
 
       await ctx.reply(
-        `ok. lets continue, ${ctx.session.userModelAttr?.name}! ` +
+        `ok. lets continue, ${ctx.session.userModelAttr.name}! ` +
           "you can make deposit everyday per 10 subers",
         Markup.inlineKeyboard([
           Markup.button.callback("deposit 10", "deposit 10"),
