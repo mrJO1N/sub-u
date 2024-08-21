@@ -10,14 +10,13 @@ dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET ?? "";
 
-type generateJwtOptions = { id: number; email?: string; role: string };
 const generateJwt = ({ id, email, role }: generateJwtOptions) =>
   jwt.sign({ id, email, role }, JWT_SECRET, {
     expiresIn: "24h",
   });
 
 class UsersController {
-  async reg(req: Request, res: Response, next: NextFunction) {
+  async reg(req: CustomRequest, res: Response, next: NextFunction) {
     const { email, password, name, specPassword } = req.body;
 
     if (specPassword) {
@@ -104,8 +103,12 @@ class UsersController {
   }
 
   // async getJWT(req: Request, res: Response, next: NextFunction) {}
-  async getBalance(req: Request, res: Response, next: NextFunction) {
-    const userId = req.body.__user.id;
+  async getBalanceSubscription(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    const userId = req.body.__JWT_user.id;
     const user = await models.User.findByPk(userId);
     if (!user) {
       return next(ApiError.badRequest("User not found"));
@@ -114,6 +117,64 @@ class UsersController {
     logAllRight(req.url);
     res.json({ balance: user.dataValues.balance });
   }
+  async getBalance(req: CustomRequest, res: Response, next: NextFunction) {
+    const userId = req.body.__JWT_user.id;
+    const user = await models.User.findByPk(userId);
+    if (!user) {
+      return next(ApiError.badRequest("User not found"));
+    }
+
+    logAllRight(req.url);
+    res.json({ balance: user.dataValues.balance });
+  }
+  async patchOne(req: CustomRequest, res: Response, next: NextFunction) {
+    const userId = req.body.__JWT_user.id;
+    const { name, email, password } = req.body;
+
+    const fieldsToUpdate = Object.fromEntries(
+      Object.entries({ name, email, password }).filter(
+        ([key, val]) => val !== undefined
+      )
+    );
+
+    if (Object.keys(fieldsToUpdate).length <= 0)
+      return next(ApiError.badRequest("missing fields to update"));
+
+    const updatedUser = await models.User.update(fieldsToUpdate, {
+      where: { id: userId },
+    });
+
+    if (!updatedUser[0])
+      return next(ApiError.badRequest("User not found or not updated"));
+
+    res.send();
+    logAllRight(req.url);
+  }
+  async deleteOne(req: CustomRequest, res: Response, next: NextFunction) {
+    const userId = req.body.__JWT_user.id;
+
+    const destroyRes = await models.User.destroy({ where: { id: userId } });
+
+    if (!destroyRes) return next(ApiError.badRequest("user not found"));
+
+    res.send();
+    logAllRight(req.url);
+  }
+}
+
+type generateJwtOptions = { id: number; email?: string; role: string };
+interface CustomRequest extends Request {
+  body: {
+    __JWT_user: {
+      id: number;
+      email: string;
+      role: string;
+    };
+    email?: string;
+    password?: string;
+    name: string;
+    specPassword?: string;
+  };
 }
 
 export default new UsersController();

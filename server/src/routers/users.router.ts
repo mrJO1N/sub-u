@@ -10,13 +10,19 @@ router.post("/reg", usersValidator.reg, usersController.reg);
 router.get("/auth", authValidator.checkToken, (req, res) => {
   res.send();
 });
-router.get("/balance", authValidator.checkToken, usersController.getBalance);
+// router.get("/balance", authValidator.checkToken, usersController.getBalance);
+router.get(
+  "/balance/subscribe",
+  authValidator.checkToken,
+  usersController.getBalanceSubscription
+);
 
-router.patch("/mod", authValidator.checkToken, (req, res) => {
-  res.json({ message: "in developments" });
-});
-router.delete("/mod", authValidator.checkToken, (req, res) => {
-  res.json({ message: "in developments" });
-});
+router.patch(
+  "/mod",
+  authValidator.checkToken,
+  usersValidator.patchOne,
+  usersController.patchOne
+);
+router.delete("/mod", authValidator.checkToken, usersController.deleteOne);
 
 export default router;

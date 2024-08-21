@@ -6,9 +6,6 @@ class UsersValidator {
   async login(req: Request, res: Response, next: NextFunction) {
     const { name, password } = req.body;
 
-    // if (!name || !password)
-    //   return next(ApiError.badRequest("missing name or password"));
-
     const bodyRequired = Joi.object({
       name: Joi.string().required(),
       password: Joi.string().required(),
@@ -53,6 +50,20 @@ class UsersValidator {
       if (error) return next(ApiError.badRequest(error.message));
     } else
       return next(ApiError.badRequest("missing name, or password, or email"));
+
+    next();
+  }
+
+  async patchOne(req: Request, res: Response, next: NextFunction) {
+    // const { name, password } = req.body;
+
+    // const bodyRequired = Joi.object({
+    //   name: Joi.string().required(),
+    //   password: Joi.string().required(),
+    // });
+
+    // const { error } = bodyRequired.validate({ name, password });
+    // if (error) return next(ApiError.badRequest(error.message));
 
     next();
   }
