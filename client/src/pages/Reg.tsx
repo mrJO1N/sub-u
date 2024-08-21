@@ -29,7 +29,7 @@ function Reg() {
     const { error } = formDataSchema.validate(formData, { abortEarly: false });
     if (error) return setError(error.message);
 
-    const resData = await userService.userReg(
+    const { data: resData } = await userService.userReg(
       formData.username,
       formData.email,
       formData.password

@@ -29,7 +29,7 @@ class TransfersController {
       { balance: toUser.dataValues.balance + amount },
       { where: { id: toUser.dataValues.id }, transaction }
     );
-    await models.Transfer.create(
+    const createdTransferModel = await models.Transfer.create(
       {
         fromUserId: fromUser.dataValues.id,
         toUserId: toUser.dataValues.id,
@@ -38,10 +38,11 @@ class TransfersController {
       { transaction }
     );
 
-    const result = await transaction.commit();
+    await transaction.commit();
+    if (!createdTransferModel) next(ApiError.internal("transfer isnt created"));
 
+    res.send();
     logAllRight(req.url);
-    res.send(result);
   }
   async requestQR(req: Request, res: Response, next: NextFunction) {
     const { amount } = req.body;

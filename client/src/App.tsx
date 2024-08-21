@@ -17,14 +17,17 @@ function App() {
     const token = localStorage.getItem("token");
 
     if (token) {
-      userService.checkToken(token).then((data) => {
+      userService.checkToken(token).then(({ err, data }) => {
+        if (err) return console.error(err);
         if (data.message) return console.error(data.message);
-        setUserToken(token);
-        if (setIsAuth) setIsAuth(true);
+
+        setIsAuth(true);
+        userService.getBalance(token).then(({ balance, err }) => {
+          if (err) return console.error(err);
+          setUserData({ ...userData, balance: balance ?? 0 });
+        });
       });
-      userService.getBalance(token).then((balance) => {
-        setUserData({ ...userData, balance: balance ?? 0 });
-      });
+
       // setUserData({ ...userData, balance: 100 });
     }
   }, []);
@@ -43,14 +46,16 @@ function App() {
       >
         <BrowserRouter>
           {isAuth ? (
-            <Header menuList={[{ url: "/transfers", label: "transfer" }]} />
-          ) : (
             <Header
               menuList={[
-                { url: "/login", label: "sigh in" },
-                { url: "/transfers", label: "transfer" },
+                {
+                  label: "transfer",
+                  options: [{ url: "/transfers", label: "make to" }],
+                },
               ]}
             />
+          ) : (
+            <Header menuList={[{ url: "/login", label: "sigh in" }]} />
           )}
           <AppRouter />
         </BrowserRouter>

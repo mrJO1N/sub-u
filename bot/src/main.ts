@@ -49,3 +49,9 @@ await sequelize.authenticate();
 
 const bot = new Bot(config);
 await bot.init();
+
+//for anti-blocking render.com
+import { createServer } from "http";
+createServer().listen(config.get("HTTP_PORT") ?? 80, () =>
+  logger.info("http server listening")
+);

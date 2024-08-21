@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from "express";
 import { logAllRight } from "../utils/logger";
 import transfersController from "./transfers.controller";
 import { ApiError } from "../errors/API.error";
-// import { models } from "../db/models";
 
 class DepositsController {
   async deposit(req: Request, res: Response, next: NextFunction) {

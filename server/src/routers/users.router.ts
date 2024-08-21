@@ -12,4 +12,11 @@ router.get("/auth", authValidator.checkToken, (req, res) => {
 });
 router.get("/balance", authValidator.checkToken, usersController.getBalance);
 
+router.patch("/mod", authValidator.checkToken, (req, res) => {
+  res.json({ message: "in developments" });
+});
+router.delete("/mod", authValidator.checkToken, (req, res) => {
+  res.json({ message: "in developments" });
+});
+
 export default router;
