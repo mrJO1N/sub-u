@@ -52,6 +52,9 @@ await bot.init();
 
 //for anti-blocking render.com
 import { createServer } from "http";
-createServer().listen(config.get("HTTP_PORT") ?? 80, () =>
+createServer((req, res) => {
+  res.writeHead(200);
+  res.end("ok");
+}).listen(config.get("HTTP_PORT") ?? 80, () =>
   logger.info("http server listening")
 );

@@ -5,9 +5,12 @@ import logger from "../../utils/logger";
 
 dotenv.config();
 
+type l = { __JWT_user: { id: number }; [key: string]: any };
+
 class AuthValidator {
   checkToken(req: Request, res: Response, next: NextFunction) {
     if (req.method === "OPTIONS") next();
+
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
       logger.error("auth token not provided");
@@ -19,7 +22,8 @@ class AuthValidator {
       const decoded = jwt.verify(token, JWT_SECRET);
 
       // give decoded to next controller or middleware
-      req.body.__user = decoded;
+      req.body.__JWT_user = decoded;
+
       next();
     } catch (err) {
       logger.error("auth invalid token");

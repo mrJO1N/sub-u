@@ -128,3 +128,14 @@ front:
 
 - fix requests on starting
 - add DropDownMenu.tsx
+
+## 0.6.3 beta
+
+bot:
+
+- fix anti-blocking
+
+back:
+
+- add DELETE /api/users/mod
+- add developments of PATCH /api/users/mod
