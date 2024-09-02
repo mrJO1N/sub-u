@@ -2,11 +2,11 @@
   "name": "subu.server",
   "version": "0.0.0",
   "description": "",
-  "type": "module",
   "exports": "./src/main.ts",
+  "type": "module",
   "scripts": {
     "start": "node ./dist/main.js",
-    "strt": "node --loader ts-node/esm ./src/main.ts",
+    "strt": "npx tsx ./src/main.ts",
     "build": "rimraf ./dist && tsc",
     "dev": "nodemon"
   },
@@ -20,7 +20,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.14.11",
     "rimraf": "^6.0.1",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.19.0",
     "typescript": "^5.5.3"
   },
   "dependencies": {

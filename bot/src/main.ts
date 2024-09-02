@@ -9,6 +9,7 @@ import { config } from "./services/config/config.service.js";
 import { StartCommand } from "./commands/start.command.js";
 import { DepositActionsCommand } from "./commands/deposit.actions.js";
 import { ConfigServiceI } from "./services/config/config.interface.js";
+import launchHttpServer from "./utils/emptyHTTP.server.js";
 
 class Bot {
   bot: Telegraf<BotContextI>;
@@ -20,14 +21,11 @@ class Bot {
   }
 
   async init() {
-    await subUService.checkJWT().catch(async (err) => {
-      const loginRes = await subUService
-        .login()
-        .then((loginRes) => {
-          if (loginRes.status !== 200) throw new Error("login failed");
-          if (loginRes.data.token) config.set("JWT_TOKEN", loginRes.data.token);
-        })
-        .catch((err) => {});
+    await subUService.checkJWT().catch(async (errJWT) => {
+      const { err, resData: loginResData } = await subUService.login();
+
+      if (err) return logger.error({ data: loginResData, ...err });
+      // if (loginResData.token) config.set("JWT_TOKEN", loginResData.token);
     });
 
     this.commands = [
@@ -42,6 +40,14 @@ class Bot {
     this.bot.launch();
     logger.info("Bot started");
   }
+
+  async shutdown() {
+    this.bot.stop();
+    logger.info("Bot stopped");
+    await sequelize.close();
+    logger.info("Database connection closed");
+    process.exit(0);
+  }
 }
 
 await sequelize.sync({ force: true });
@@ -50,11 +56,8 @@ await sequelize.authenticate();
 const bot = new Bot(config);
 await bot.init();
 
+process.on("SIGINT", bot.shutdown);
+process.on("SIGTERM", bot.shutdown);
+
 //for anti-blocking render.com
-import { createServer } from "http";
-createServer((req, res) => {
-  res.writeHead(200);
-  res.end("ok");
-}).listen(config.get("HTTP_PORT") ?? 80, () =>
-  logger.info("http server listening")
-);
+await launchHttpServer(Number(config.get("HTTP_PORT") ?? 80));

@@ -139,3 +139,16 @@ back:
 
 - add DELETE /api/users/mod
 - add developments of PATCH /api/users/mod
+
+## 0.6.3 beta-2
+
+bot:
+
+- add shutdown mechanism
+- fix api service
+
+back:
+
+- migrate node@18 => node@22 and npm
+- replace ts-node to tsx
+- add http:PATCH /api/users/mod

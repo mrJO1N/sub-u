@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { logAllRight } from "../utils/logger";
-import { generateQRToken } from "../utils/QRTokens";
-import conn from "../db/conn";
-import { ApiError } from "../errors/API.error";
-import { models } from "../db/models";
+import { logAllRight } from "../utils/logger.js";
+import { generateQRToken } from "../utils/QRTokens.js";
+import conn from "../db/conn.js";
+import { ApiError } from "../errors/API.error.js";
+import { models } from "../db/models.js";
+// import { emitter } from "../events/user.events";
 
 class TransfersController {
   async makeTo(req: Request, res: Response, next: NextFunction) {
@@ -41,7 +42,9 @@ class TransfersController {
     await transaction.commit();
     if (!createdTransferModel) next(ApiError.internal("transfer isnt created"));
 
+    toUser;
     res.send();
+    // emitter.emit("changeBalance", [toUser, fromUser]);
     logAllRight(req.url);
   }
   async requestQR(req: Request, res: Response, next: NextFunction) {

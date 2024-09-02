@@ -2,9 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import { logAllRight } from "../utils/logger";
-import { ApiError } from "../errors/API.error";
-import { models } from "../db/models";
+import logger, { logAllRight } from "../utils/logger.js";
+import { ApiError } from "../errors/API.error.js";
+import { models } from "../db/models.js";
+// import { emitter } from "../events/user.events";
 
 dotenv.config();
 
@@ -108,13 +109,13 @@ class UsersController {
     res: Response,
     next: NextFunction
   ) {
+    // emitter.on("changeBalane",())
     const userId = req.body.__JWT_user.id;
     const user = await models.User.findByPk(userId);
     if (!user) {
       return next(ApiError.badRequest("User not found"));
     }
 
-    logAllRight(req.url);
     res.json({ balance: user.dataValues.balance });
   }
   async getBalance(req: CustomRequest, res: Response, next: NextFunction) {
@@ -136,15 +137,19 @@ class UsersController {
         ([key, val]) => val !== undefined
       )
     );
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      fieldsToUpdate.password = hashedPassword;
+    }
 
     if (Object.keys(fieldsToUpdate).length <= 0)
       return next(ApiError.badRequest("missing fields to update"));
 
-    const updatedUser = await models.User.update(fieldsToUpdate, {
+    const [updatedCount] = await models.User.update(fieldsToUpdate, {
       where: { id: userId },
     });
 
-    if (!updatedUser[0])
+    if (!updatedCount)
       return next(ApiError.badRequest("User not found or not updated"));
 
     res.send();

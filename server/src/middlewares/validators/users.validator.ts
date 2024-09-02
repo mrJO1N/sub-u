@@ -20,8 +20,6 @@ class UsersValidator {
   async reg(req: Request, res: Response, next: NextFunction) {
     const { email, password, name, specPassword } = req.body;
 
-    if (!name) return next(ApiError.badRequest("missing name"));
-
     type bodyRequiredT = {
       name: string;
       specPassword?: string;

@@ -10,7 +10,7 @@ import { ApiError } from "../errors/API.error.js";
 export class DepositActionsCommand extends Command {
   protected async runRequest(ctx: BotContextI) {
     const user = ctx.session.userModelAttr;
-    let error: Error | undefined;
+    let error;
     if (!user) return { err: ApiError.internal("bad user") };
 
     const { err } = await subUService.deposit10(user.name);

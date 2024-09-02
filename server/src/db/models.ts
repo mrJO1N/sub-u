@@ -1,7 +1,9 @@
-import User from "./models/user.model";
-import Transfer from "./models/transfer.model";
+import User, { UserT } from "./models/user.model.js";
+import Transfer from "./models/transfer.model.js";
 
 export const models = {
   User,
   Transfer,
 };
+
+export { UserT };
